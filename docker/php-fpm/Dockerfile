@@ -16,7 +16,7 @@ COPY ./docker/php-fpm/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 RUN apk add --no-cache libpq-dev && docker-php-ext-install pdo_pgsql
 
 
-RUN useradd -G www-data,root -u $uid -d /home/$user $user
+RUN adduser -G www-data,root -u $uid -d /home/$user $user
 RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
 
