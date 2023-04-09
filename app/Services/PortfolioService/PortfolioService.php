@@ -67,6 +67,9 @@ class PortfolioService implements PortfolioServiceInterface
 		return $this->portfolioRepository->getByUser($user);
 	}
 	
+	/**
+	 * @throws PortfolioNotFoundException
+	 */
 	public function getValue(User $user, ?string $symbol = null, string $date = null): ?array
 	{
 		$date = !is_null($date) ? Carbon::parse($date) : null;
@@ -77,8 +80,8 @@ class PortfolioService implements PortfolioServiceInterface
 			$portfolios = $this->portfolioRepository->getByUser($user);
 		}
 		
-		if ($portfolios === null) {
-			return null;
+		if ($portfolios->isEmpty()) {
+			throw new PortfolioNotFoundException();
 		}
 		
 		$symbols = $portfolios->pluck('symbol')->unique()->toArray();
