@@ -6,14 +6,10 @@ services:
     build:
       context: ./../
       dockerfile: ./docker/php-fpm/Dockerfile
-      args:
-        user: user
-        uid: 1000
     environment:
       PHP_IDE_CONFIG: "serverName=Docker"
     volumes:
       - ./../:/var/www/
-    command: sh -c "composer install --ignore-platform-reqs && php artisan key:generate"
 
   s-nginx:
     container_name: orbis-nginx
