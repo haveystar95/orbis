@@ -4,7 +4,7 @@ namespace App\Helpers;
 
 class MathHelper
 {
-	public static function roundFloatShares($value, $precision = 5): float
+	public static function roundFloatShares($value, $precision = 2): float
 	{
 		return round($value, $precision);
 	}

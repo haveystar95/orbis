@@ -8,7 +8,7 @@ class PortfolioNotFoundException extends ClientException
 {
 	protected function getCustomMessage(): string
 	{
-		return 'Portfolio by this Id nof found';
+		return 'Portfolio nof found';
 	}
 	
 	protected function getCustomCode(): int

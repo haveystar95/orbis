@@ -75,7 +75,8 @@ class PortfolioService implements PortfolioServiceInterface
 		$date = !is_null($date) ? Carbon::parse($date) : null;
 		
 		if ($symbol) {
-			$portfolios = Collection::make([$this->portfolioRepository->findByUserAndSymbol($user, $symbol)]);
+			$portfolio = $this->portfolioRepository->findByUserAndSymbol($user, $symbol);
+			$portfolios = $portfolio === null ? Collection::make() : Collection::make([$portfolio]);
 		} else {
 			$portfolios = $this->portfolioRepository->getByUser($user);
 		}
