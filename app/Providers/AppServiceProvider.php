@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use App\Repositories\HistoricalDataRepository\HistoricalDataRepositoryInterface;
+use App\Repositories\PortfolioRepository\PortfolioRepositoryInterface;
 use App\Repositories\UserRepository\UserRepositoryInterface;
+use App\Services\PortfolioService\PortfolioService;
+use App\Services\PortfolioService\PortfolioServiceInterface;
 use App\Services\UserService\UserFactory;
 use App\Services\UserService\UserService;
 use App\Services\UserService\UserServiceInterface;
@@ -25,6 +29,14 @@ class AppServiceProvider extends ServiceProvider
 				function (): UserServiceInterface {
 					return new UserService(new UserFactory(),
 							$this->app->make(UserRepositoryInterface::class));
+				});
+		
+		$this->app->singleton(PortfolioServiceInterface::class,
+				function (): PortfolioServiceInterface {
+					return new PortfolioService(
+							$this->app->make(PortfolioRepositoryInterface::class),
+							$this->app->make(HistoricalDataRepositoryInterface::class),
+					);
 				});
 		
 		

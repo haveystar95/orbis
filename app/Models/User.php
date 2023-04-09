@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -11,7 +10,6 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
  * App\Models\User
- *
  * @property int $id
  * @property string $name
  * @property string $email
@@ -74,7 +72,7 @@ class User extends Authenticatable implements JWTSubject
 		return $this->getKey();
 	}
 	
-	public function getJWTCustomClaims()
+	public function getJWTCustomClaims(): array
 	{
 		return [];
 	}
