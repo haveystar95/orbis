@@ -7,7 +7,7 @@ services:
       context: ./../
       dockerfile: ./docker/php-fpm/Dockerfile
       args:
-        user: user1
+        user: user
         uid: 1000
     environment:
       PHP_IDE_CONFIG: "serverName=Docker"

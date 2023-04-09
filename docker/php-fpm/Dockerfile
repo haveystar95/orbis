@@ -1,6 +1,6 @@
 FROM php:8.1.0-fpm-alpine
 
-ARG user=user1
+ARG user=user
 ARG uid=1000
 
 RUN apk add --update linux-headers
@@ -20,8 +20,8 @@ RUN useradd -G www-data,root -u $uid -d /home/$user $user
 RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
 
-RUN chown www-data:www-data /var/www
-COPY --chown=www-data:www-data ./ /var/www
+RUN chown user:user /var/www
+COPY --chown=user:user ./ /var/www
 WORKDIR /var/www
 
 USER $user
