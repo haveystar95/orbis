@@ -1,7 +1,7 @@
 FROM php:8.1.0-fpm-alpine
 
 RUN apk add --update linux-headers
-RUN apk add --no-cache curl git build-base zlib-dev oniguruma-dev autoconf bash
+RUN apk add --no-cache curl git build-base zlib-dev oniguruma-dev autoconf bash su-exec
 
 ARG INSTALL_XDEBUG=false
 RUN if [ ${INSTALL_XDEBUG} = true ]; \
@@ -18,7 +18,5 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 CMD php-fpm
 COPY ../../entrypoint.sh /usr/local/bin/
-
-EXPOSE 9000
 
 ENTRYPOINT ["entrypoint.sh"]
