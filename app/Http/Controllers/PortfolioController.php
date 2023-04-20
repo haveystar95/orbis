@@ -7,7 +7,6 @@ use App\Http\Requests\PortfolioValueRequest;
 use App\Services\PortfolioService\PortfolioDTO;
 use App\Services\PortfolioService\PortfolioServiceInterface;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class PortfolioController extends Controller
 {
