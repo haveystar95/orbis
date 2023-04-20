@@ -22,8 +22,8 @@ class PortfolioServiceTest extends TestCase
 		parent::setUp();
 		
 		$this->portfolioService = new PortfolioService(
-				new PortfolioRepository(),
-				new HistoricalDataRepository()
+			new PortfolioRepository(),
+			new HistoricalDataRepository()
 		);
 	}
 	
@@ -38,12 +38,12 @@ class PortfolioServiceTest extends TestCase
 		$historicalDataRepoMock = $this->createMock(HistoricalDataRepository::class);
 		
 		$portfolioRepoMock->method('findByUserAndSymbol')
-				->willReturn($user->portfolio->first());
+			->willReturn($user->portfolio->first());
 		$portfolioRepoMock->method('getByUser')
-				->willReturn($user->portfolio);
+			->willReturn($user->portfolio);
 		
 		$historicalDataRepoMock->method('getHistoricalDataBySymbols')
-				->willReturn($historicalData);
+			->willReturn($historicalData);
 		
 		$this->portfolioService = new PortfolioService($portfolioRepoMock, $historicalDataRepoMock);
 		
@@ -63,28 +63,28 @@ class PortfolioServiceTest extends TestCase
 		$portfolio->user_id = 1;
 		
 		$user->portfolio = new Collection([
-				$portfolio,
+			$portfolio,
 		]);
 		
 		return [
-				'value_for_AAPL' => [
-						$user,
-						
-						new Collection(
-								['AAPL' => (object)[
-										'symbol' => 'AAPL',
-										'close' => 110,
-										'initial_close' => 100]]
-						),
-						'AAPL',
-						'2022-01-02',
-						[
-								'value' => 1100,
-								'initial_value' => 1000,
-								'change' => 100,
-								'change_percentage' => 10,
-						],
+			'value_for_AAPL' => [
+				$user,
+				
+				new Collection(
+					['AAPL' => (object)[
+						'symbol' => 'AAPL',
+						'close' => 110,
+						'initial_close' => 100]]
+				),
+				'AAPL',
+				'2022-01-02',
+				[
+					'value' => 1100,
+					'initial_value' => 1000,
+					'change' => 100,
+					'change_percentage' => 10,
 				],
+			],
 		];
 	}
 }

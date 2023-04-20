@@ -24,15 +24,15 @@ class PortfolioApiTest extends TestCase
 		$shares = 10.12345;
 		
 		$response = $this->actingAs($user, 'api')->postJson('/api/portfolio', [
-				'symbol' => $symbol,
-				'shares' => $shares,
+			'symbol' => $symbol,
+			'shares' => $shares,
 		]);
 		
 		$response->assertStatus(201);
 		$this->assertDatabaseHas('portfolios', [
-				'user_id' => $user->id,
-				'symbol' => $symbol,
-				'shares' => $shares,
+			'user_id' => $user->id,
+			'symbol' => $symbol,
+			'shares' => $shares,
 		]);
 	}
 	
@@ -50,15 +50,15 @@ class PortfolioApiTest extends TestCase
 		$shares = 10.12345;
 		
 		$response = $this->actingAs($user, 'api')->postJson('/api/portfolio', [
-				'symbol' => $symbol,
-				'shares' => $shares,
+			'symbol' => $symbol,
+			'shares' => $shares,
 		]);
 		
 		$response->assertStatus(401);
 		$this->assertDatabaseMissing('portfolios', [
-				'user_id' => $user->id,
-				'symbol' => $symbol,
-				'shares' => $shares,
+			'user_id' => $user->id,
+			'symbol' => $symbol,
+			'shares' => $shares,
 		]);
 	}
 	
@@ -70,12 +70,12 @@ class PortfolioApiTest extends TestCase
 		$response = $this->actingAs($user, 'api')->getJson('/api/portfolio');
 		
 		$response
-				->assertStatus(200)
-				->assertJsonFragment([
-						'id' => $portfolio->id,
-						'symbol' => $portfolio->symbol,
-						'shares' => $portfolio->shares,
-				]);
+			->assertStatus(200)
+			->assertJsonFragment([
+				'id' => $portfolio->id,
+				'symbol' => $portfolio->symbol,
+				'shares' => $portfolio->shares,
+			]);
 	}
 	
 	public function test_user_can_update_their_portfolio(): void
@@ -90,14 +90,14 @@ class PortfolioApiTest extends TestCase
 		$updatedShares = 20.12345;
 		
 		$response = $this->actingAs($user, 'api')->putJson("/api/portfolio/{$portfolio->id}", [
-				'shares' => $updatedShares,
-				'symbol' => $portfolio->symbol,
+			'shares' => $updatedShares,
+			'symbol' => $portfolio->symbol,
 		]);
 		
 		$response->assertStatus(200);
 		$this->assertDatabaseHas('portfolios', [
-				'id' => $portfolio->id,
-				'shares' => $updatedShares,
+			'id' => $portfolio->id,
+			'shares' => $updatedShares,
 		]);
 	}
 	
@@ -113,12 +113,12 @@ class PortfolioApiTest extends TestCase
 		$response = $this->actingAs($user, 'api')->getJson('/api/portfolio/value');
 		
 		$response
-				->assertStatus(200)
-				->assertJsonStructure([
-						'value',
-						'initial_value',
-						'change',
-						'change_percentage',
-				]);
+			->assertStatus(200)
+			->assertJsonStructure([
+				'value',
+				'initial_value',
+				'change',
+				'change_percentage',
+			]);
 	}
 }

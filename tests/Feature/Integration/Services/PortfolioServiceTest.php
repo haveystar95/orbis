@@ -32,8 +32,8 @@ class PortfolioServiceTest extends TestCase
 	{
 		$user = User::factory()->create();
 		$portfolioData = [
-				'symbol' => 'AAPL',
-				'shares' => 10.5,
+			'symbol' => 'AAPL',
+			'shares' => 10.5,
 		];
 		$dto = new PortfolioDTO(symbol: $portfolioData['symbol'], shares: $portfolioData['shares']);
 		
@@ -43,8 +43,8 @@ class PortfolioServiceTest extends TestCase
 		$this->assertEquals($portfolioData['symbol'], $portfolio->symbol);
 		$this->assertEquals($portfolioData['shares'], $portfolio->shares);
 		$this->assertDatabaseHas('portfolios', [
-				'symbol' => 'AAPL',
-				'shares' => 10.5,
+			'symbol' => 'AAPL',
+			'shares' => 10.5,
 		]);
 	}
 	
@@ -52,8 +52,8 @@ class PortfolioServiceTest extends TestCase
 	{
 		$user = User::factory()->create();
 		$portfolioData = [
-				'symbol' => 'AAPL',
-				'shares' => 10.5,
+			'symbol' => 'AAPL',
+			'shares' => 10.5,
 		];
 		$dto = new PortfolioDTO(symbol: $portfolioData['symbol'], shares: $portfolioData['shares']);
 		
@@ -63,8 +63,8 @@ class PortfolioServiceTest extends TestCase
 		$this->assertEquals($portfolioData['symbol'], $portfolio->symbol);
 		$this->assertEquals($portfolioData['shares'], $portfolio->shares);
 		$this->assertDatabaseHas('portfolios', [
-				'symbol' => 'AAPL',
-				'shares' => 10.5,
+			'symbol' => 'AAPL',
+			'shares' => 10.5,
 		]);
 		
 		$this->expectException(PortfolioAlreadyExistsException::class);
@@ -83,8 +83,8 @@ class PortfolioServiceTest extends TestCase
 		$portfolio = Portfolio::factory()->create(['user_id' => $user->id]);
 		
 		$updatedData = [
-				'symbol' => 'GOOGL',
-				'shares' => 20.25,
+			'symbol' => 'GOOGL',
+			'shares' => 20.25,
 		];
 		
 		$dto = new PortfolioDTO(symbol: $updatedData['symbol'], shares: $updatedData['shares']);
@@ -96,9 +96,9 @@ class PortfolioServiceTest extends TestCase
 		$this->assertEquals($updatedData['shares'], $updatedPortfolio->shares);
 		
 		$this->assertDatabaseHas('portfolios', [
-				'id' => $portfolio->id,
-				'symbol' => $updatedData['symbol'],
-				'shares' => $updatedData['shares'],
+			'id' => $portfolio->id,
+			'symbol' => $updatedData['symbol'],
+			'shares' => $updatedData['shares'],
 		]);
 	}
 	
