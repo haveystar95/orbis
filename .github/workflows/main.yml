@@ -81,5 +81,5 @@ jobs:
         region: eu-north-1
         application_name: op
         environment_name: Op-env-1
-        version_label: Sample Application
+        use_existing_version_if_available: true
         deployment_package: Dockerrun.aws.json
