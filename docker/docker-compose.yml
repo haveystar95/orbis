@@ -4,8 +4,7 @@ services:
   php-fpm:
     container_name: orbis-php-fpm
     build:
-      context: ./../
-      dockerfile: ./docker/php-fpm/Dockerfile
+      context: ./php-fpm
     environment:
       PHP_IDE_CONFIG: "serverName=Docker"
     volumes:
@@ -34,14 +33,6 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - db_data:/var/lib/postgresql/data:rw
-
-  admin:
-    image: adminer
-    restart: always
-    depends_on:
-      - postgres
-    ports:
-      - "8084:8080"
 
 volumes:
   db_data:
