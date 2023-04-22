@@ -28,7 +28,15 @@ jobs:
         context: .
         file: ./docker/php-fpm/Dockerfile
         push: true
-        tags: denissolonina/php-fpm-image:latest
+        tags: denissolonina/orbis-php-fpm-image:latest
+      
+    - name: Build and push NGINX image
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        file: ./docker/nginx/Dockerfile
+        push: true
+        tags: denissolonina/orbis-nginx-image:latest
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
