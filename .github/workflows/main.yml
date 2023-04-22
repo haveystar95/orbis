@@ -28,11 +28,9 @@ jobs:
         file: |
           php-fpm/Dockerfile
           nginx/Dockerfile
-          postgres/Dockerfile
         tags: |
           ghcr.io/${{ github.repository }}/orbis-php-fpm:latest
           ghcr.io/${{ github.repository }}/orbis-nginx:latest
-          ghcr.io/${{ github.repository }}/orbis-postgres:latest
 
     - name: Deploy to AWS
       env:
