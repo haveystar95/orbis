@@ -33,7 +33,7 @@ jobs:
     - name: Build and push NGINX image
       uses: docker/build-push-action@v4
       with:
-        context: .
+        context: ./docker/nginx
         file: ./docker/nginx/Dockerfile
         push: true
         tags: denissolonina/orbis-nginx-image:latest
