@@ -78,7 +78,7 @@ jobs:
       with:
         aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        region: us-west-2
+        region: eu-north-1
         application_name: orbis
         environment_name: orbis-stage
         version_label: ${{ github.run_number }}
