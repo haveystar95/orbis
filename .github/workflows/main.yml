@@ -28,7 +28,7 @@ jobs:
         context: .
         file: ./docker/php-fpm/Dockerfile
         push: true
-        tags: php-fpm-image:latest
+        tags: denissolonina/php-fpm-image:latest
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
