@@ -47,7 +47,8 @@ jobs:
     
     - name: Save Dockerrun.aws.json
       run: |
-        echo '{
+        cat <<EOF > Dockerrun.aws.json
+        {
           "AWSEBDockerrunVersion": 2,
           "containerDefinitions": [
             {
@@ -71,7 +72,8 @@ jobs:
             },
 
           ]
-        }' > Dockerrun.aws.json
+        }
+        EOF
 
     - name: Deploy to Elastic Beanstalk
       uses: einaregilsson/beanstalk-deploy@v14
