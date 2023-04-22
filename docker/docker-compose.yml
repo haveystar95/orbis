@@ -2,6 +2,7 @@ version: "3.8"
 
 services:
   php-fpm:
+    image: ghcr.io/haveystar95/orbis/orbis-php-fpm:latest
     container_name: orbis-php-fpm
     build:
       context: ./../
@@ -12,6 +13,7 @@ services:
       - ./../:/var/www/
 
   s-nginx:
+    image: ghcr.io/haveystar95/orbis/orbis-nginx:latest
     container_name: orbis-nginx
     build:
       context: ./nginx
@@ -23,6 +25,7 @@ services:
       - php-fpm
 
   postgres:
+    image: ghcr.io/haveystar95/orbis/orbis-postgres:latest
     container_name: orbis-postgres
     build:
       context: ./postgres
