@@ -27,8 +27,8 @@ jobs:
         push: true
         file: |
           ./docker/php-fpm/Dockerfile
-          ./docker/nginx/Dockerfile
-          ./docker/postgres/Dockerfile
+          ./nginx/Dockerfile
+          ./postgres/Dockerfile
         tags: |
           ghcr.io/${{ github.repository }}/orbis-php-fpm:latest
           ghcr.io/${{ github.repository }}/orbis-nginx:latest
