@@ -28,7 +28,7 @@ jobs:
         context: .
         file: ./docker/php-fpm/Dockerfile
         push: true
-        tags: orbis/php-fpm-image:latest
+        tags: php-fpm-image:latest
 
     - name: Build and push Nginx image
       uses: docker/build-push-action@v4
