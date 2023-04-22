@@ -44,3 +44,42 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-west-2
+    
+    - name: Save Dockerrun.aws.json
+      run: |
+        echo '{
+          "AWSEBDockerrunVersion": 2,
+          "containerDefinitions": [
+            {
+              "name": "php-fpm",
+              "image": "denissolonina/orbis-php-fpm-image:latest",
+              "essential": true,
+              "memory": 128
+            },
+            {
+              "name": "s-nginx",
+              "image": "denissolonina/orbis-nginx-image:latest",
+              "essential": true,
+              "memory": 128,
+              "portMappings": [
+                {
+                  "hostPort": 80,
+                  "containerPort": 80
+                }
+              ]
+              "links": ["php-fpm"]
+            },
+
+          ]
+        }' > Dockerrun.aws.json
+
+    - name: Deploy to Elastic Beanstalk
+      uses: einaregilsson/beanstalk-deploy@v14
+      with:
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        region: us-west-2
+        application_name: orbis
+        environment_name: orbis-stage
+        version_label: ${{ github.run_number }}
+        deployment_package: Dockerrun.aws.json
