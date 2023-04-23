@@ -16,7 +16,10 @@ COPY . /var/www
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-CMD php-fpm
 COPY ../../entrypoint.sh /usr/local/bin/
+
+WORKDIR /var/www
+
+CMD ["php-fpm"]
 
 EXPOSE 9000
