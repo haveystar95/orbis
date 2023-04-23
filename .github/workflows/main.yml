@@ -61,7 +61,7 @@ jobs:
     
     - name: Create deploy.zip
       run: |
-        zip -r deploy.zip ./Dockerrun.aws.json ./.ebextensions
+        zip -r deploy.zip ./.ebextensions ./Dockerrun.aws.json
     
     - name: Deploy to Elastic Beanstalk
       uses: einaregilsson/beanstalk-deploy@v16
