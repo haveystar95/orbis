@@ -57,5 +57,5 @@ jobs:
         region: eu-north-1
         application_name: op
         environment_name: Op-env-1
-        version_label: "docker-app-${{ steps.format-time.outputs.replaced }}"
+        version_label: ${{ github.run_number }}
         deployment_package: deploy.zip
