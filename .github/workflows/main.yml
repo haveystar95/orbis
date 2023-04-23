@@ -38,6 +38,16 @@ jobs:
         push: true
         tags: denissolonina/orbis-nginx-image:latest
 
+    - name: Make envfile
+      uses: SpicyPizza/create-envfile@v1.3
+      with:
+        envkey_APP_NAME: "Orbis"
+        envkey_APP_DEBUG: false
+        envkey_APP_ENV: "production"
+        envkey_SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        file_name: .env
+        fail_on_empty: false
+    
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -47,7 +57,7 @@ jobs:
     
     - name: Create deploy.zip
       run: |
-        zip -r deploy.zip ./Dockerrun.aws.json ./.ebextensions
+        zip -r deploy.zip ./Dockerrun.aws.json ./.ebextensions ./.env
     
     - name: Deploy to Elastic Beanstalk
       uses: einaregilsson/beanstalk-deploy@v16
