@@ -11,9 +11,9 @@ chmod -R 777 /var/www/storage
 
 # Install composer dependencies
 cd /var/www
-su-exec myuser composer install
-su-exec myuser php artisan key:generate
-su-exec myuser php artisan migrate
+#su-exec myuser composer install
+#su-exec myuser php artisan key:generate
+#su-exec myuser php artisan migrate
 #su-exec myuser php artisan import:historical-data storage/app/historical_data.csv
 
 exec php-fpm
