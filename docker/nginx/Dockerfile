@@ -1,10 +1,12 @@
-# Use the official Nginx image as the base
-FROM nginx:1.21
+FROM nginx:alpine
 
-# Copy the custom Nginx configuration file
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/
+COPY default.conf /etc/nginx/conf.d/
 
-COPY . /var/www
+RUN apk update && apk upgrade && apk add --no-cache bash
 
-# Remove the default Nginx HTML files
-RUN rm -rf /usr/share/nginx/html/*
+ARG PHP_UPSTREAM_CONTAINER=php-fpm
+ARG PHP_UPSTREAM_PORT=9000
+RUN echo "upstream php-upstream { server ${PHP_UPSTREAM_CONTAINER}:${PHP_UPSTREAM_PORT}; }" > /etc/nginx/conf.d/upstream.conf
+
+EXPOSE 80
