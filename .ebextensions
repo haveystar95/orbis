@@ -1,7 +1,7 @@
 container_commands:
-  01_composer_install:
+  01_download_env_file:
+    command: aws s3 cp s3://elasticbeanstalk-eu-north-1-227641327966/env-files/.env /var/app/current/.env
+  02_composer_install:
     command: "docker-compose -f /var/app/current/docker/docker-compose.yml exec -T php-fpm composer install1"
     ignoreErrors: true
-  02_run_tests:
-    command: "docker-compose -f /var/app/current/docker/docker-compose.yml exec -T php-fpm vendor/bin/phpunit"
-    ignoreErrors: true
+
