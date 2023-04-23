@@ -44,7 +44,11 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-west-2
-
+    
+    - name: Create deploy.zip
+      run: |
+        zip deploy.zip ./Dockerrun.aws.json
+    
     - name: Deploy to Elastic Beanstalk
       uses: einaregilsson/beanstalk-deploy@v14
       with:
@@ -54,4 +58,4 @@ jobs:
         application_name: op
         environment_name: Op-env-1
         version_label: "docker-app-${{ steps.format-time.outputs.replaced }}"
-        deployment_package: Dockerrun.aws.json
+        deployment_package: deploy.zip
