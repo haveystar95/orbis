@@ -59,3 +59,24 @@ jobs:
         environment_name: op-prod
         version_label: ${{ github.run_number }}
         deployment_package: deploy.zip
+    
+    - name: Set up AWS CLI
+      run: |
+        curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+        unzip awscliv2.zip
+        sudo ./aws/install
+    
+    - name: Configure AWS CLI
+      run: |
+        aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws configure set default.region us-west-2
+        
+    - name: Get Elastic Beanstalk environment information
+      id: eb-env-info
+      run: |
+        echo "::set-output name=env-id::$(aws elasticbeanstalk describe-environments --application-name op --environment-names op-prod --query "Environments[0].EnvironmentId" --output text)"
+    
+    - name: Run composer install in php-fpm container
+      run: |
+        aws elasticbeanstalk send-command --environment-id ${{ steps.eb-env-info.outputs.env-id }} --command-name EXECUTE --instance-ids $(aws elasticbeanstalk describe-instances-health --environment-id ${{ steps.eb-env-info.outputs.env-id }} --query "InstanceHealthList[0].InstanceId" --output text) --command-args 'docker-compose -f /var/app/current/docker/docker-compose.yml exec -T php-fpm composer install'
