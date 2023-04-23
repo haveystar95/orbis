@@ -55,9 +55,13 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-west-2
     
+    - name: Upload .env file to S3
+      run: |
+        aws s3 cp .env s3://elasticbeanstalk-eu-north-1-227641327966/env-files/.env     
+    
     - name: Create deploy.zip
       run: |
-        zip -r deploy.zip ./Dockerrun.aws.json ./.ebextensions ./.env
+        zip -r deploy.zip ./Dockerrun.aws.json ./.ebextensions
     
     - name: Deploy to Elastic Beanstalk
       uses: einaregilsson/beanstalk-deploy@v16
