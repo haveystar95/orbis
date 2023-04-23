@@ -2,7 +2,7 @@ FROM nginx:alpine
 
 COPY nginx.conf /etc/nginx/
 COPY default.conf /etc/nginx/conf.d/
-
+COPY . /var/www
 RUN apk update && apk upgrade && apk add --no-cache bash
 
 RUN set -x ; \
