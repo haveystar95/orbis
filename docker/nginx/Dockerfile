@@ -1,3 +1,3 @@
 FROM nginx:alpine
-COPY nginx/default.conf /etc/nginx/conf.d
+COPY default.conf /etc/nginx/conf.d
 COPY . /var/www/
