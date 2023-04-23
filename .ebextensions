@@ -1,0 +1,7 @@
+container_commands:
+  01_composer_install:
+    command: "docker-compose -f /var/app/current/docker/docker-compose.yml exec -T php-fpm composer install"
+    ignoreErrors: true
+  02_run_tests:
+    command: "docker-compose -f /var/app/current/docker/docker-compose.yml exec -T php-fpm vendor/bin/phpunit"
+    ignoreErrors: true
