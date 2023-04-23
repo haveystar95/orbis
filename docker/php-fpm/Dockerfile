@@ -19,4 +19,4 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 CMD php-fpm
 COPY ../../entrypoint.sh /usr/local/bin/
 
-ENTRYPOINT ["entrypoint.sh"]
+EXPOSE 9000
