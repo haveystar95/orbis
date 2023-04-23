@@ -4,13 +4,13 @@
     {
       "name": "php-fpm",
       "image": "denissolonina/orbis-php-fpm-image:latest",
-      "essential": "true",
+      "essential": true,
       "memory": "128"
     },
     {
       "name": "nginx",
       "image": "denissolonina/orbis-nginx-image:latest",
-      "essential": "true",
+      "essential": true,
       "memory": "128",
       "portMappings": [
         {
