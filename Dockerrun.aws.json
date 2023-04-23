@@ -6,6 +6,21 @@
       "image": "denissolonina/orbis-php-fpm-image:latest",
       "essential": true,
       "memory": "128"
+    },
+    {
+      "name": "nginx",
+      "image": "denissolonina/orbis-nginx-image:latest",
+      "essential": true,
+      "memory": 128,
+      "PortMappings": [
+        {
+          "HostPort": 80,
+          "ContainerPort": 80
+        }
+      ],
+      "Links": [
+        "php-fpm"
+      ]
     }
   ]
 }
